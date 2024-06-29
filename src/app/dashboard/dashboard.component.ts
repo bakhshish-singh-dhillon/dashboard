@@ -1,16 +1,17 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { CountriesService } from '../services/countries.service';
 import { Country } from '../../types';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-inventory',
+  selector: 'app-dashboard',
   standalone: true,
   imports: [NgFor],
-  templateUrl: './inventory.component.html',
-  styleUrl: './inventory.component.scss'
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.scss'
 })
-export class InventoryComponent {
+export class DashboardComponent {
+
   constructor(
     private countriesService:CountriesService
   ){}
