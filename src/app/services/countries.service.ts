@@ -10,7 +10,7 @@ export class CountriesService {
 
   constructor(private apiService: ApiService) { }
 
-  getCountries = (url:string):Observable<Country> => {
+  getCountries = (url:string):Observable<Country[]> => {
     return this.apiService.get(url)
   }
 }

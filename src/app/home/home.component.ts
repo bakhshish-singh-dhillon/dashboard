@@ -17,16 +17,12 @@ export class HomeComponent {
     private countriesService:CountriesService
   ){}
 
+  countries: Array<Country> = [];
+
   ngOnInit(){
-    this.countriesService.getCountries('https://freetestapi.com/api/v1/countries?limit=199').subscribe((countries:Country)=>{
-      console.log(countries)
+    this.countriesService.getCountries('https://freetestapi.com/api/v1/countries?limit=199').subscribe((countries:Country[])=>{
+      this.countries = countries;
     })
   }
 
-  @Input() countries:Country[] = [
-    {
-      "id":11,"name":"Azerbaijan","population":10139175,"land_area":86600,"density":117.1,"capital":"Baku","currency":"Azerbaijani manat","flag":"https://fakeimg.pl/500x300/00ccff"
-    },
-    {"id":11,"name":"Azerbaijan","population":10139175,"land_area":86600,"density":117.1,"capital":"Baku","currency":"Azerbaijani manat","flag":"https://fakeimg.pl/500x300/00ccff"}
-  ];
 }
