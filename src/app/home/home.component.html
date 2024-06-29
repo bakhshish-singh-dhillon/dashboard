@@ -1,2 +1,12 @@
 <div class="header">
+    <table>
+        <tr *ngFor="let country of countries; index as id">
+            <td>{{country.name}}</td>
+            <td>{{country.capital}}</td>
+            <td>{{country.currency}}</td>
+            <td>{{country.density}}</td>
+            <td>{{country.land_area}}</td>
+            <td>{{country.population}}</td>
+        </tr>
+    </table>
 </div>
