@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { Country } from '../../types';
+import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { CountriesService } from '../services/countries.service';
+import { Country } from '../../types';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-inventory',
   standalone: true,
-  imports: [],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  imports: [NgFor],
+  templateUrl: './inventory.component.html',
+  styleUrl: './inventory.component.scss'
 })
-export class HomeComponent {
-
+export class InventoryComponent {
   constructor(
     private countriesService:CountriesService
   ){}
@@ -22,5 +22,4 @@ export class HomeComponent {
       this.countries = countries;
     })
   }
-
 }
