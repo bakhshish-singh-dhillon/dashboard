@@ -15,10 +15,10 @@
   <table>
     <tr>
       @for (head of tableHeads; track $index) { @if (head.checked) {
-      <th>{{ head.name }}</th>
+      <th (click)="sortCountries(head.name)">{{ head.name }}</th>
       } }
     </tr>
-    <tr *ngFor="let country of countries; index as id">
+    <tr *ngFor="let country of countries; index as i">
       @for (head of tableHeads; track $index) { @if (head.checked) {
         <td>{{ country[head.name] }}</td>
       } }

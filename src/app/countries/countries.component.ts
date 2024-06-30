@@ -16,6 +16,7 @@ export class CountriesComponent {
 
   countries: Country[] = [];
   tableHeads: TableHeader[] = [];
+  sortBy: string = 'id';
 
   ngOnInit() {
     this.countriesService
@@ -32,4 +33,31 @@ export class CountriesComponent {
         console.log(this.tableHeads);
       });
   }
+
+  sortCountries(sortBy: string): Country[] {
+    this.sortBy = sortBy;
+    console.log(sortBy)
+    if (!isNaN(Number(this.countries[0][this.sortBy])))
+      return this.countries.sort(
+        (a, b) => Number(a[this.sortBy]) - Number(b[this.sortBy])
+      );
+    else
+      return this.countries.sort((a, b) => {
+        if (
+          a[this.sortBy].toString().toUpperCase() <
+          b[this.sortBy].toString().toUpperCase()
+        ) {
+          return -1;
+        } else if (
+          a[this.sortBy].toString().toUpperCase() >
+          b[this.sortBy].toString().toUpperCase()
+        ) {
+          return 1;
+        } else return 0;
+      });
+  }
+
+  // searchCountries(query:string):Country[] {
+
+  // }
 }
