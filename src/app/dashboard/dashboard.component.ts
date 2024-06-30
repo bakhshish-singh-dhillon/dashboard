@@ -71,7 +71,7 @@ export class DashboardComponent {
       'bar',
       this.landArea.map(c => c.name),
       this.landArea.map(c => c.land_area),
-      'LandArea',
+      'Land Area',
       'barchart'
     )
   }

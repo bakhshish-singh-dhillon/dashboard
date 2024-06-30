@@ -3,11 +3,12 @@ import { CountriesService } from '../services/countries.service';
 import { Country, Pagination, TableHeader } from '../../types';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-countries',
   standalone: true,
-  imports: [NgFor, FormsModule],
+  imports: [NgFor, FormsModule, MatIconModule],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss',
 })
@@ -19,13 +20,14 @@ export class CountriesComponent {
   sortBy: string = 'id';
   apiResult: Country[] = [];
   searchQuery: string = '';
+  filter: boolean = true;
   paginate: Pagination = {
-    current:0,
-    next:1,
-    prev:-1,
-    pageSize:10,
-    total:this.countries.length
-  }
+    current: 0,
+    next: 1,
+    prev: -1,
+    pageSize: 15,
+    total: this.countries.length,
+  };
 
   ngOnInit() {
     this.countriesService
@@ -67,42 +69,46 @@ export class CountriesComponent {
 
   searchCountries() {
     var regex = RegExp('.*' + this.searchQuery + '.*', 'i');
-    console.log(this.searchQuery)
+    console.log(this.searchQuery);
     var result = this.apiResult.filter(
       (country) =>
         regex.test(country.capital) ||
         regex.test(country.name) ||
         regex.test(country.currency)
     );
-    if(this.searchQuery == ""){
-      this.countries = this.apiResult
+    if (this.searchQuery == '') {
+      this.countries = this.apiResult;
       this.resetPaginate();
-    }
-    else{
+    } else {
       this.countries = result ? result : [];
       this.resetPaginate();
     }
   }
-  
-  prevPage(){
+
+  resetSearch(){
+    this.searchQuery="";
+    this.searchCountries();
+  }
+
+  prevPage() {
     this.paginate.current--;
     this.paginate.prev--;
     this.paginate.next--;
   }
 
-  nextPage(){
+  nextPage() {
     this.paginate.current++;
-    this.paginate.next++
+    this.paginate.next++;
     this.paginate.prev++;
   }
 
-  resetPaginate(){
+  resetPaginate() {
     this.paginate = {
-      current:0,
-      next:1,
-      prev:-1,
-      pageSize:this.paginate.pageSize,
-      total:this.countries.length
-    }
+      current: 0,
+      next: 1,
+      prev: -1,
+      pageSize: this.paginate.pageSize,
+      total: this.countries.length,
+    };
   }
 }

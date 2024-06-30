@@ -1,7 +1,9 @@
-div.charts{
-    display: flex;
+div.inner-container{
+display: flex;
+    
+}
+div.chart {
+    flex-grow: 1;
+    box-sizing: border-box;
 }
 
-div.charts canvas{
-    max-width: 500px;
-}

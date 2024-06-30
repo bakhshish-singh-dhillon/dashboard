@@ -1,3 +1,109 @@
 th {
   cursor: pointer;
+  text-transform: capitalize;
+}
+
+div.countries-container {
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+div.filter-dropdown-container {
+  float: right;
+  background-color: #2f4969;
+  margin: 10px 10px 10px 10px;
+}
+
+div.filter-dropdown {
+  position: absolute;
+  background-color: #eceff6;
+}
+
+div.filters {
+  display: flex;
+  flex: 0 0 100%;
+}
+div.inner-container {
+  flex: 0 0 100%;
+}
+div.search {
+  display: flex;
+  margin: 10px;
+}
+div.search input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 500px;
+  background: #f1f1f1;
+}
+div.search button {
+  background: #ffffff;
+  color: #696969;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+  padding-top: 5px;
+}
+
+div.filter-dropdown ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.filter-dropdown ul li:hover {
+  background-color: #c7cacf;
+}
+
+div.filter-dropdown ul li {
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+div.filter-dropdown ul li label {
+  text-transform: capitalize;
+}
+
+div.filter-dropdown-container .mat-icon {
+  color: #ffffff;
+  font-size: 2rem;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  padding-top: 5px;
+}
+
+#countries-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 10px;
+}
+
+#countries-table td,
+#countries-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#countries-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#countries-table tr:hover {
+  background-color: #ddd;
+}
+
+#countries-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #2f4969;
+  color: white;
+  text-wrap: nowrap;
 }
