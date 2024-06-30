@@ -1,0 +1,15 @@
+body{
+    height: 100%;
+}
+div.main-container{
+    display: flex;
+    height: 100%;
+}
+
+div.sidebar{
+    background-color: #eceff6;
+}
+
+div.router-container{
+    flex: 1 auto 0
+}

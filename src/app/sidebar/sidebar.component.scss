@@ -1,0 +1,22 @@
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+ul li{
+    margin: 5px;
+}
+ul a{
+    display: flex;
+    text-decoration: none;
+    color: #000000;
+    padding: 5px 10px ;
+}
+ul a .mat-icon{
+    padding: 0 5px;
+}
+ul a.active{
+    font-weight: 700;
+}
+ul li:hover{
+    background-color: #c0c2c7;
+}
