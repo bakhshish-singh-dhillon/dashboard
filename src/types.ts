@@ -1,10 +1,17 @@
 export interface Country{
-    id:number,
+    id:string,
     name:string,
-    population:number,
-    land_area:number,
-    density:number,
+    population:string,
+    land_area:string,
+    density:string,
     capital:string,
     currency:string,
-    flag:string
+    flag:string,
+    [key:string]: number|string
+}
+
+export interface TableHeader{
+    name:string,
+    checked:boolean,
+    [key:string]: number|string|boolean
 }
