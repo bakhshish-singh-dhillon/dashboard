@@ -17,11 +17,10 @@ export interface TableHeader{
 }
 
 export interface Pagination{
-    offset:number,
     current:number,
     next:number,
     prev:number,
     total:number,
-    perPage:number,
+    pageSize:number,
     [key:string]: number|string|boolean
 }

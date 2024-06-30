@@ -21,10 +21,19 @@
       <th (click)="sortCountries(head.name)">{{ head.name }}</th>
       } }
     </tr>
-    <tr *ngFor="let country of searchQuery == ''?countries:searchResult; index as i">
+    <tr *ngFor="let country of countries.slice(paginate.current*paginate.pageSize,paginate.next*paginate.pageSize); index as i">
       @for (head of tableHeads; track $index) { @if (head.checked) {
       <td>{{ country[head.name] }}</td>
       } }
     </tr>
   </table>
+</div>
+<div class="pagination">
+    @if(paginate.prev>-1){
+        <span (click)="prevPage()">&lt;</span>
+    }
+    {{paginate.current+1}}
+    @if(paginate.next*paginate.pageSize<this.countries.length){
+        <span (click)="nextPage()">&gt;</span>
+    }
 </div>
