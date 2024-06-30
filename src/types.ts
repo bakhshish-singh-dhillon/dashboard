@@ -15,3 +15,13 @@ export interface TableHeader{
     checked:boolean,
     [key:string]: number|string|boolean
 }
+
+export interface Pagination{
+    offset:number,
+    current:number,
+    next:number,
+    prev:number,
+    total:number,
+    perPage:number,
+    [key:string]: number|string|boolean
+}

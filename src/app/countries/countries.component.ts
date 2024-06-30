@@ -26,13 +26,11 @@ export class CountriesComponent {
       .subscribe((countries: Country[]) => {
         this.countries = countries;
         Object.keys(countries[0]).forEach((element, index) => {
-          console.log(element);
           this.tableHeads[index] = {
             name: element,
             checked: true,
           };
         });
-        console.log(this.tableHeads);
       });
   }
 
@@ -60,7 +58,7 @@ export class CountriesComponent {
   }
 
   searchCountries() {
-    var regex = RegExp('.*' + this.searchQuery + '.*','i');
+    var regex = RegExp('.*' + this.searchQuery + '.*', 'i');
     var result = this.countries.filter(
       (country) =>
         regex.test(country.capital) ||
