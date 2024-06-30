@@ -1,0 +1,33 @@
+h1{
+    margin: 0;
+    padding: 0;
+}
+header{
+    background-color: #2f4969;
+    text-align: center;
+    overflow: auto;
+}
+
+header div{
+    display: inline-block;
+    color: #ffffff;
+}
+
+header .burger-menu{
+    float: left;
+    padding: 10px;
+}
+
+header div svg{
+    color: #ffffff;
+}
+
+header .header-title h1{
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: 10px 0;    
+}
+header .profile-icon{
+    float: right;
+    padding: 10px;
+}
