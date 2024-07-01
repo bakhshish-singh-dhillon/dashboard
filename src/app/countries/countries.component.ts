@@ -4,6 +4,7 @@ import { Country, Pagination, TableHeader } from '../../types';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-countries',
@@ -85,8 +86,30 @@ export class CountriesComponent {
     }
   }
 
-  resetSearch(){
-    this.searchQuery="";
+  downloadFile() {
+    const replacer = (key:any, value:any) => (value === null ? '' : value); // specify how you want to handle null values here
+    const header = this.tableHeads.map(head=> head.name)
+    const csv = this.countries.map((row: any) =>
+      header
+        .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+        .join(',')
+    );
+    csv.unshift(header.join(','));
+    const csvArray = csv.join('\r\n');
+  
+    const a = document.createElement('a');
+    const blob = new Blob([csvArray], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+  
+    a.href = url;
+    a.download = 'Countries.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove();
+  }
+
+  resetSearch() {
+    this.searchQuery = '';
     this.searchCountries();
   }
 
@@ -102,6 +125,16 @@ export class CountriesComponent {
     this.paginate.prev++;
   }
 
+  lastPage() {
+    this.paginate.current = Math.round(
+      this.countries.length / this.paginate.pageSize
+    );
+    this.paginate.next =
+      Math.round(this.countries.length / this.paginate.pageSize) + 1;
+    this.paginate.prev =
+      Math.round(this.countries.length / this.paginate.pageSize) - 1;
+  }
+
   resetPaginate() {
     this.paginate = {
       current: 0,
@@ -110,5 +143,16 @@ export class CountriesComponent {
       pageSize: this.paginate.pageSize,
       total: this.countries.length,
     };
+  }
+
+  roundOff(num: any) {
+    return Math.round(num);
+  }
+
+  resetFilters() {
+    this.resetSearch();
+    this.tableHeads.forEach((head) => {
+      head.checked = true;
+    });
   }
 }

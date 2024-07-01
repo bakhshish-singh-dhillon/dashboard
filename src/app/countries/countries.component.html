@@ -10,8 +10,6 @@
     </div>
     <div class="filter-dropdown-container" (mouseleave)="filter=true">
       <mat-icon
-        aria-hidden="false"
-        aria-label="Example home icon"
         fontIcon="filter_list"
         (click)="filter=!filter"
       ></mat-icon>
@@ -32,6 +30,15 @@
         </ul>
       </div>
     </div>
+    <a class="clear-filter"
+    (click)="resetFilters()"><mat-icon
+      fontIcon="filter_alt_off"
+    ></mat-icon> <span>Clear Filters</span></a>
+    
+    <a class="export-csv"
+    (click)="downloadFile()"><mat-icon
+      fontIcon="download"
+    ></mat-icon> <span>Export CSV</span></a>
   </div>
   <div class="inner-container">
     <table id="countries-table">
@@ -56,16 +63,18 @@
     
       <br>
       @if(paginate.prev>-1){
-          <span (click)="prevPage()">&lt;</span>
+        
+        <a (click)="resetPaginate()">&lt;&lt; </a>
+        <a (click)="prevPage()"> &lt; </a>
       }
-      {{paginate.current+1}}
-      @if(paginate.next*paginate.pageSize<this.countries.length){
-          <span (click)="nextPage()">&gt;</span>
+        <span> Page {{paginate.current+1}} of {{roundOff(countries.length/paginate.pageSize)+1}}</span>
+      @if(paginate.next*paginate.pageSize<countries.length){
+        <a (click)="nextPage()">&gt;</a>
+        <a (click)="lastPage()">&gt;&gt;</a>
       }
 
     <br>
     
-    Page {{paginate.current+1}} of {{(this.countries.length/paginate.pageSize+1).toFixed()}}
   </div>
   
 </div>

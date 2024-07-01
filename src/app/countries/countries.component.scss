@@ -9,9 +9,8 @@ div.countries-container {
 }
 
 div.filter-dropdown-container {
-  float: right;
   background-color: #2f4969;
-  margin: 10px 10px 10px 10px;
+  margin: 10px 10px 10px auto;
 }
 
 div.filter-dropdown {
@@ -75,7 +74,7 @@ div.filter-dropdown-container .mat-icon {
   height: 32px;
   width: 32px;
   vertical-align: middle;
-  padding-top: 5px;
+  padding: 7px 5px 0 5px;
 }
 
 #countries-table {
@@ -106,4 +105,35 @@ div.filter-dropdown-container .mat-icon {
   background-color: #2f4969;
   color: white;
   text-wrap: nowrap;
+}
+
+.pagination a, .pagination span{
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+.pagination a{
+  display: inline-block;
+  margin: 5px 20px;
+  background-color: #2f4969;
+  color: #ffffff;
+  cursor: pointer;
+}
+.clear-filter .mat-icon, .export-csv .mat-icon{
+  color: #ffffff;
+  font-size: 1.5rem;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  padding-top: 5px;
+}
+.clear-filter, .export-csv {
+  background-color: #2f4969;
+  margin: 10px 10px 10px 0;
+  padding:  5px 10px;
+  color: #ffffff;
+  font-size: 1rem;
+  vertical-align: middle;
+  box-sizing: border-box;
+  cursor: pointer;
 }
