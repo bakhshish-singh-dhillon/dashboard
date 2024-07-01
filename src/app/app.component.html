@@ -1,11 +1,11 @@
 <div class="header">
-  <app-header></app-header>
+  <app-header [title]="title"></app-header>
 </div>
 <div class="main-container">
   <div class="sidebar">
     <app-sidebar></app-sidebar>
   </div>
   <div class="router-container">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="setHeader()"></router-outlet>
   </div>
 </div>
