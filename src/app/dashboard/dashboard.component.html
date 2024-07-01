@@ -1,8 +1,28 @@
-<div class="inner-container">
-  <div class="chart">
-    <canvas id="piechart"></canvas>
+<div class="dashbaord-container">
+  <div class="stats-container">
+    <div class="stats">
+      <h2>Population Density</h2>
+      <span class="separator"></span>
+      <ul>
+        <li *ngFor="let density of population; index as i">
+          <span>{{ density.name }}</span> : <span>{{ density.density }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="stats-total">
+      <h2>Total Countries</h2>
+      <span class="separator"></span>
+      <div class="total">
+        <span>{{ this.countries.length }}</span>
+      </div>
+    </div>
   </div>
-  <div class="chart">
-    <canvas id="barchart"></canvas>
+  <div class="inner-container">
+    <div class="chart">
+      <canvas id="piechart"></canvas>
+    </div>
+    <div class="chart">
+      <canvas id="barchart"></canvas>
+    </div>
   </div>
 </div>

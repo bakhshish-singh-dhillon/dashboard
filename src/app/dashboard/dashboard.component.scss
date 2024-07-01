@@ -1,9 +1,76 @@
-div.inner-container{
-display: flex;
-    
+div.inner-container {
+  display: flex;
+  padding-right: 20px;
 }
 div.chart {
-    flex-grow: 1;
-    box-sizing: border-box;
+  flex-basis: 50%;
+  box-sizing: border-box;
+}
+div.stats-container {
+  display: flex;
+  justify-content: space-around;
+}
+div.stats-container div {
+  background-color: #145087;
+  margin: 20px;
+  border-radius: 5px;
+  padding: 20px;
+  color: #ffffff;
+  position: relative;
+  text-align: center;
+  display: flex;
+  box-sizing: border-box;
+}
+div.stats-container div h2 {
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 20px;
+  font-size: 2rem;
 }
 
+div.stats-container div.stats h2 {
+  padding: 20px 40px 0 40px;
+}
+
+div.stats ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 10px;
+  padding: 0;
+}
+
+div.stats ul li {
+  flex-basis: 50%;
+  text-align: left;
+}
+div.stats-container div .separator {
+  display: inline-block;
+  border-left: 3px solid #ccc;
+  margin: 10px 10px 0 10px;
+  height: 125px;
+  width: 3px;
+}
+div.stats-container .stats {
+  flex-basis: 70%;
+}
+div.stats-container .stats-total {
+  width: 30%;
+}
+div.stats-container .total span {
+  display: inline-block;
+  font-size: 2rem;
+  padding-top: 20px;
+}
+
+@media screen and (min-width: 1645px) {
+    div.stats-container .stats-total h2{
+        padding: 20px 0 0 15%;
+      }
+  }
+  @media screen and (min-width: 1645px) {
+    div.stats-container .stats-total h2{
+        padding: 40px 0 0 0;
+        margin-left: 20%
+      }
+  } 

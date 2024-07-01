@@ -6,14 +6,17 @@ export const routes: Routes = [
     {
         path: '',
         redirectTo: '/dashboard',
-        pathMatch: "full"
+        pathMatch: "full",
+        title:'Dashbaord'
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        title:'Dashbaord'
     },
     {
         path: 'countries',
-        component: CountriesComponent
+        component: CountriesComponent,
+        title:'World Countries'
     }
 ];

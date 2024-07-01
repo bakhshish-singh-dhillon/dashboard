@@ -31,7 +31,7 @@ export class DashboardComponent {
       });
   }
 
-  drawChart(chartType:any, labels:string[], data:string[], datalabel:string, canvasID:string ) {
+  drawChart(chartType:any, labels:string[], data:string[], datalabel:string, canvasID:string, aspectRatio:number ) {
     const pie = new Chart(canvasID, {
       type: chartType,
       data: {
@@ -45,7 +45,7 @@ export class DashboardComponent {
         ],
       },
       options: {
-        aspectRatio: 2.5,
+        aspectRatio: aspectRatio,
       },
     });
   }
@@ -59,7 +59,8 @@ export class DashboardComponent {
       this.population.map(c => c.name),
       this.population.map(c => c.population),
       'Population',
-      'piechart'
+      'piechart',
+      2
     )
   }
 
@@ -72,7 +73,8 @@ export class DashboardComponent {
       this.landArea.map(c => c.name),
       this.landArea.map(c => c.land_area),
       'Land Area',
-      'barchart'
+      'barchart',
+      1.5
     )
   }
 
