@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CountriesService } from '../services/countries.service';
 import { Country } from '../../types';
 import { NgFor } from '@angular/common';
-import { Chart, registerables } from 'Chart.js';
+import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 @Component({
