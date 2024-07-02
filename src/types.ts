@@ -13,6 +13,7 @@ export interface Country{
 export interface TableHeader{
     name:string,
     checked:boolean,
+    sort:number,
     [key:string]: number|string|boolean
 }
 

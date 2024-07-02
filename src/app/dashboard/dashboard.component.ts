@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CountriesService } from '../services/countries.service';
 import { Country } from '../../types';
 import { NgFor } from '@angular/common';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, scales } from 'chart.js';
 Chart.register(...registerables);
 
 @Component({
@@ -17,8 +17,8 @@ export class DashboardComponent {
 
   countries: Country[] = [];
   apiResult: Country[] = [];
-  population: any[] =[];
-  landArea: any[] =[];
+  population: any[] = [];
+  landArea: any[] = [];
 
   ngOnInit() {
     this.countriesService
@@ -26,22 +26,28 @@ export class DashboardComponent {
       .subscribe((countries: Country[]) => {
         this.countries = countries;
         this.apiResult = countries;
-        this.generatePopulationChart()
-        this.generateLandAreaChart()
+        this.generatePopulationChart();
+        this.generateLandAreaChart();
       });
   }
 
-  drawChart(chartType:any, labels:string[], data:string[], datalabel:string, canvasID:string, aspectRatio:number ) {
-    const pie = new Chart(canvasID, {
+  drawChart(
+    chartType: any,
+    labels: string[],
+    data: string[],
+    datalabel: string,
+    canvasID: string,
+    aspectRatio: number
+  ) {
+    const chart = new Chart(canvasID, {
       type: chartType,
       data: {
         labels: labels,
-        datasets: 
-        [
+        datasets: [
           {
             label: datalabel,
             data: data,
-          }
+          },
         ],
       },
       options: {
@@ -50,32 +56,31 @@ export class DashboardComponent {
     });
   }
 
-  generatePopulationChart(){
-    this.population = this.countries.sort(
-      (a, b) => Number(b.population) - Number(a.population)
-    ).slice(0,10);
+  generatePopulationChart() {
+    this.population = this.countries
+      .sort((a, b) => Number(b.population) - Number(a.population))
+      .slice(0, 10);
     this.drawChart(
       'pie',
-      this.population.map(c => c.name),
-      this.population.map(c => c.population),
+      this.population.map((c) => c.name),
+      this.population.map((c) => c.population),
       'Population',
       'piechart',
       2
-    )
+    );
   }
 
-  generateLandAreaChart(){
-    this.landArea = this.countries.sort(
-      (a, b) => Number(b.population) - Number(a.population)
-    ).slice(0,10);
+  generateLandAreaChart() {
+    this.landArea = this.countries
+      .sort((a, b) => Number(b.population) - Number(a.population))
+      .slice(0, 10);
     this.drawChart(
       'bar',
-      this.landArea.map(c => c.name),
-      this.landArea.map(c => c.land_area),
+      this.landArea.map((c) => c.name),
+      this.landArea.map((c) => c.land_area),
       'Land Area',
       'barchart',
       1.5
-    )
+    );
   }
-
 }

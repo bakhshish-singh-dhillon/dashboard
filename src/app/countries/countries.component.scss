@@ -6,11 +6,13 @@ th {
 div.countries-container {
   flex-direction: column;
   flex-grow: 1;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 div.filter-dropdown-container {
   background-color: #2f4969;
-  margin: 10px 10px 10px auto;
+  margin: 10px 0 10px auto;
 }
 
 div.filter-dropdown {
@@ -23,11 +25,12 @@ div.filters {
   flex: 0 0 100%;
 }
 div.inner-container {
+  overflow: auto;
   flex: 0 0 100%;
 }
 div.search {
   display: flex;
-  margin: 10px;
+  margin: 10px 0;
 }
 div.search input[type="text"] {
   padding: 10px;
@@ -81,7 +84,11 @@ div.filter-dropdown-container .mat-icon {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  margin: 0 10px;
+  table-layout: fixed;
+}
+
+#countries-table .mat-icon{
+  float: right;
 }
 
 #countries-table td,
@@ -129,7 +136,7 @@ div.filter-dropdown-container .mat-icon {
 }
 .clear-filter, .export-csv {
   background-color: #2f4969;
-  margin: 10px 10px 10px 0;
+  margin: 10px 0 10px 10px;
   padding:  5px 10px;
   color: #ffffff;
   font-size: 1rem;

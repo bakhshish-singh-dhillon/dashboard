@@ -40,30 +40,33 @@ export class CountriesComponent {
           this.tableHeads[index] = {
             name: element,
             checked: true,
+            sort: 1,
           };
         });
       });
   }
 
-  sortCountries(sortBy: string): Country[] {
+  sortCountries(sortBy: string, index: number): Country[] {
     this.sortBy = sortBy;
-    console.log(sortBy);
-    if (!isNaN(Number(this.countries[0][this.sortBy])))
+    this.tableHeads[index].sort = -1 * this.tableHeads[index].sort;
+    if (!isNaN(Number(this.countries[0][this.sortBy]))) {
       return this.countries.sort(
-        (a, b) => Number(a[this.sortBy]) - Number(b[this.sortBy])
+        (a, b) =>
+          (Number(a[this.sortBy]) - Number(b[this.sortBy])) *
+          this.tableHeads[index].sort
       );
-    else
+    } else
       return this.countries.sort((a, b) => {
         if (
           a[this.sortBy].toString().toUpperCase() <
           b[this.sortBy].toString().toUpperCase()
         ) {
-          return -1;
+          return -1 * this.tableHeads[index].sort;
         } else if (
           a[this.sortBy].toString().toUpperCase() >
           b[this.sortBy].toString().toUpperCase()
         ) {
-          return 1;
+          return 1 * this.tableHeads[index].sort;
         } else return 0;
       });
   }
@@ -87,8 +90,8 @@ export class CountriesComponent {
   }
 
   downloadFile() {
-    const replacer = (key:any, value:any) => (value === null ? '' : value); // specify how you want to handle null values here
-    const header = this.tableHeads.map(head=> head.name)
+    const replacer = (key: any, value: any) => (value === null ? '' : value); // specify how you want to handle null values here
+    const header = this.tableHeads.map((head) => head.name);
     const csv = this.countries.map((row: any) =>
       header
         .map((fieldName) => JSON.stringify(row[fieldName], replacer))
@@ -96,11 +99,11 @@ export class CountriesComponent {
     );
     csv.unshift(header.join(','));
     const csvArray = csv.join('\r\n');
-  
+
     const a = document.createElement('a');
     const blob = new Blob([csvArray], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
-  
+
     a.href = url;
     a.download = 'Countries.csv';
     a.click();
@@ -153,6 +156,8 @@ export class CountriesComponent {
     this.resetSearch();
     this.tableHeads.forEach((head) => {
       head.checked = true;
+      head.sort = 1;
     });
+    this.sortBy = "id"
   }
 }
