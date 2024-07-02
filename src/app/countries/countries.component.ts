@@ -16,7 +16,7 @@ import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 export class CountriesComponent {
   constructor(
     private countriesService: CountriesService,
-    private router:Router,
+    private router: Router,
     private route: ActivatedRoute
   ) {}
 
@@ -24,7 +24,7 @@ export class CountriesComponent {
   tableHeads: TableHeader[] = [];
   sortBy: SortBy = {
     name: 'id',
-    order: -1,
+    order: 1,
   };
   apiResult: Country[] = [];
   @Input() searchQuery: string = '';
@@ -59,13 +59,12 @@ export class CountriesComponent {
 
   sortCountries(sortBy: string, index: number): Country[] {
     this.sortBy.name = sortBy;
-    this.tableHeads[index].sort = -1 * this.tableHeads[index].sort;
-    this.sortBy.order = this.tableHeads[index].sort;
+    this.tableHeads[index].sort = -1 * this.sortBy.order;
     if (!isNaN(Number(this.countries[0][this.sortBy.name]))) {
       return this.countries.sort(
         (a, b) =>
           (Number(a[this.sortBy.name]) - Number(b[this.sortBy.name])) *
-          this.tableHeads[index].sort
+          this.sortBy.order
       );
     } else
       return this.countries.sort((a, b) => {
@@ -73,12 +72,12 @@ export class CountriesComponent {
           a[this.sortBy.name].toString().toUpperCase() <
           b[this.sortBy.name].toString().toUpperCase()
         ) {
-          return -1 * this.tableHeads[index].sort;
+          return -1 * this.sortBy.order;
         } else if (
           a[this.sortBy.name].toString().toUpperCase() >
           b[this.sortBy.name].toString().toUpperCase()
         ) {
-          return 1 * this.tableHeads[index].sort;
+          return 1 * this.sortBy.order;
         } else return 0;
       });
   }
@@ -172,6 +171,18 @@ export class CountriesComponent {
     ];
   }
 
+  sortPage(name: string, order: number) {
+    this.sortBy.order = order;
+    return [
+      '/countries',
+      this.paginate.current + 1,
+      'page',
+      name,
+      this.sortByNumToStringOrder(),
+      this.searchQuery,
+    ];
+  }
+
   setPage(page: any) {
     if (
       page != '' &&
@@ -228,15 +239,18 @@ export class CountriesComponent {
     this.searchCountries();
     const headId = this.getHeadId(this.sortBy.name);
     this.tableHeads[headId].sort = this.sortBy.order;
-    // this.sortCountries(this.sortBy.name, headId);
+    this.sortCountries(this.sortBy.name, headId);
 
     this.route.params.subscribe((data: Params) => {
       this.setPage(data['page']);
       this.searchQuery = data['searchQuery'] ? data['searchQuery'] : '';
+      this.sortBy.name = data['sorthead'] ? data['sorthead'] : 'id';
+      this.sortBy.order = data['order']
+        ? this.sortByStringToNumOrder(data['order'])
+        : -1;
       // this.searchCountries();
       const headId = this.getHeadId(this.sortBy.name);
-      this.tableHeads[headId].sort = this.sortBy.order;
-      // this.sortCountries(this.sortBy.name, headId);
+      this.sortCountries(this.sortBy.name, headId);
     });
   }
 

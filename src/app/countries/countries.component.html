@@ -44,9 +44,9 @@
     <table id="countries-table">
       <tr>
         @for (head of tableHeads; track $index) { @if (head.checked) {
-        <th (click)="sortCountries(head.name, $index)">
+        <th><a [routerLink]="sortPage(head.name, head.sort)">
           {{ head.name.replace("_", " ") }}
-          <mat-icon fontIcon="swap_vert" ></mat-icon>
+          <mat-icon fontIcon="swap_vert" ></mat-icon></a>
         </th>
         } }
       </tr>
