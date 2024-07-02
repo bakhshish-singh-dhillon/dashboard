@@ -22,7 +22,7 @@ export class AppComponent {
         if (event instanceof NavigationEnd) {
           setTimeout(() => {
             this.title = this.titleService.getTitle();
-          }, 50); // If no timeout it gets previous page title
+          }, 50); 
         }
       },
     });

@@ -16,7 +16,6 @@ export class DashboardComponent {
   constructor(private countriesService: CountriesService) {}
 
   countries: Country[] = [];
-  apiResult: Country[] = [];
   population: any[] = [];
   landArea: any[] = [];
 
@@ -25,7 +24,6 @@ export class DashboardComponent {
       .getCountries('https://freetestapi.com/api/v1/countries?limit=199')
       .subscribe((countries: Country[]) => {
         this.countries = countries;
-        this.apiResult = countries;
         this.generatePopulationChart();
         this.generateLandAreaChart();
       });
