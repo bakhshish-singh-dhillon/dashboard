@@ -158,6 +158,7 @@ export class CountriesComponent {
       head.checked = true;
       head.sort = 1;
     });
-    this.sortBy = "id"
+    this.tableHeads[0].sort = -1;
+    this.sortCountries('id', 0);
   }
 }
