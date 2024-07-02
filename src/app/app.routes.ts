@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CountriesComponent } from './countries/countries.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     {
@@ -20,13 +21,14 @@ export const routes: Routes = [
         title:'World Countries'
     },
     {
-        path: 'countries/:page/page',
+        path: 'countries/:page/page/:sortHead/:order',
         component: CountriesComponent,
         title:'World Countries'
     },
     {
-        path: 'countries/:page/page/:searchQuery',
+        path: 'countries/:page/page/:sortHead/:order/:searchQuery',
         component: CountriesComponent,
         title:'World Countries'
-    }
+    },
+    { path: '**', component: PageNotFoundComponent },
 ];

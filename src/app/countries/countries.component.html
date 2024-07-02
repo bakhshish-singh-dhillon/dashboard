@@ -79,13 +79,13 @@
     <br/>
       @if(paginate.prev>-1){
         
-        <a [routerLink]="['/countries',1,'page',searchQuery]" >&lt;&lt; </a>
-        <a [routerLink]="['/countries',this.paginate.current,'page',searchQuery]"> &lt; </a>
+        <a [routerLink]="firstPage()" >&lt;&lt; </a>
+        <a [routerLink]="prevPage()"> &lt; </a>
       }
         <span> Page {{paginate.current+1}} of {{roundOff(countries.length/paginate.pageSize)+1}}</span>
       @if(paginate.next*paginate.pageSize<countries.length){
-        <a [routerLink]="['/countries',this.paginate.current+2,'page',searchQuery]">&gt;</a>
-        <a [routerLink]="['/countries',roundOff(countries.length/paginate.pageSize)+1,'page',searchQuery]">&gt;&gt;</a>
+        <a [routerLink]="nextPage()">&gt;</a>
+        <a [routerLink]="lastPage()">&gt;&gt;</a>
       }
     <br />
   </div>
