@@ -4,23 +4,27 @@ import { Country, Pagination, TableHeader } from '../../types';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { saveAs } from 'file-saver';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-countries',
   standalone: true,
-  imports: [NgFor, FormsModule, MatIconModule],
+  imports: [NgFor, FormsModule, MatIconModule, RouterLink],
   templateUrl: './countries.component.html',
   styleUrl: './countries.component.scss',
 })
 export class CountriesComponent {
-  constructor(private countriesService: CountriesService) {}
+  constructor(
+    private countriesService: CountriesService,
+    private route: ActivatedRoute
+  ) {}
 
   countries: Country[] = [];
   tableHeads: TableHeader[] = [];
   sortBy: string = 'id';
   apiResult: Country[] = [];
-  searchQuery: string = '';
+  @Input() searchQuery: string = '';
+  @Input() page: number = 1;
   filter: boolean = true;
   paginate: Pagination = {
     current: 0,
@@ -42,6 +46,14 @@ export class CountriesComponent {
             checked: true,
             sort: 1,
           };
+        });
+        this.page = this.page ? this.page - 1 : 1;
+        this.searchQuery = this.searchQuery ? this.searchQuery : '';
+        this.setPage(this.page);
+        this.searchCountries();
+        this.route.params.subscribe((data: Params) => {
+          this.setPage(data['page']);
+          this.searchQuery = data['searchQuery'] ? data['searchQuery'] : '';
         });
       });
   }
@@ -116,6 +128,13 @@ export class CountriesComponent {
     this.searchCountries();
   }
 
+  
+  firstPage() {
+    this.paginate.current--;
+    this.paginate.prev--;
+    this.paginate.next--;
+  }
+
   prevPage() {
     this.paginate.current--;
     this.paginate.prev--;
@@ -132,10 +151,20 @@ export class CountriesComponent {
     this.paginate.current = Math.round(
       this.countries.length / this.paginate.pageSize
     );
-    this.paginate.next =
-      Math.round(this.countries.length / this.paginate.pageSize) + 1;
-    this.paginate.prev =
-      Math.round(this.countries.length / this.paginate.pageSize) - 1;
+    this.paginate.next = this.paginate.current + 1;
+    this.paginate.prev = this.paginate.current - 1;
+  }
+
+  setPage(page: any) {
+    if (
+      page != '' &&
+      page - 1 <= Math.round(this.countries.length / this.paginate.pageSize) &&
+      page - 1 > -1
+    ) {
+      this.paginate.current = page - 1;
+      this.paginate.next = this.paginate.current + 1;
+      this.paginate.prev = this.paginate.current - 1;
+    }
   }
 
   resetPaginate() {

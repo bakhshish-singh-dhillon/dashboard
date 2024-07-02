@@ -18,5 +18,15 @@ export const routes: Routes = [
         path: 'countries',
         component: CountriesComponent,
         title:'World Countries'
+    },
+    {
+        path: 'countries/:page/page',
+        component: CountriesComponent,
+        title:'World Countries'
+    },
+    {
+        path: 'countries/:page/page/:searchQuery',
+        component: CountriesComponent,
+        title:'World Countries'
     }
 ];
